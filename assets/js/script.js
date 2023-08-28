@@ -38,5 +38,12 @@ function registerPet(){
     let pet = new Pet(owner, petname, specie, photo, birthdate);
     ListOfPet.add(pet);
 }
+function dateinPTBR(date) {
+    console.log("Passou pela funcao dateinPTBR()");
+
+    let dateArray = date.split("-");
+    let datePTBR = dateArray[2] + "/" + dateArray[1] + "/" + dateArray[0];
+    return datePTBR;
+}
 const ListOfPet = new PetsList();
 console.log(ListOfPet);
