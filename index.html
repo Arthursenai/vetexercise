@@ -12,9 +12,10 @@
         <h1>Clínica Veterinária</h1>
         <ul>
             <li><a href="index.html">Cadastro</a></li>
-            <li><a href="./pages/show.html">Exibição</a></li>
+            <li><button id="show" onclick="showPet()">Exibição</button></li>
         </ul>
     </header>
+    <div id="container">
     <h1>Clinica Veterinária</h1>
     <label for="owner">
         <span>Tutor:</span>
@@ -38,5 +39,10 @@
     </label>
     <p id="errorMsg"></p>
     <button onclick="regiserPet()">Cadastrar</button>
+</div>
+<div id="container2" class="hidden">
+    <h1>Exibição</h1>
+<div id="pets-content">d</div>
+</div>
 </body>
 </html>

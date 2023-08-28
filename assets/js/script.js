@@ -29,6 +29,7 @@ class PetsList{
             sendErrorMsg("Preencha todos os campos!", "error");
         } else{
             this.pets.push(pet);
+            clearFields();
             sendErrorMsg("Pet cadastrado com sucesso!", "success");
         }
     }
@@ -66,10 +67,37 @@ function regiserPet(){
 
     let pet = new Pet(owner, petname, specie, photo, birthdate);
     ListOfPet.addPet(pet);
+    
 }
 function dateinPTBR(date) {
     let dateArray = date.split("-");
     let datePTBR = dateArray[2] + "/" + dateArray[1] + "/" + dateArray[0];
     return datePTBR;
+}
+function clearFields(){
+    document.getElementById("owner").value = "";
+    document.getElementById("pet").value = "";
+    document.getElementById("specie").value = "";
+    document.getElementById("photo").value = "";
+    document.getElementById("birth").value = "";
+}
+function showPet(){
+    let showContent = document.getElementById("pets-content");
+    ListOfPet.pets.forEach(pet => {
+        showContent += `
+        <div class="card" style="width: 18rem;">
+            <img src="${pet.photo}" class="card-img-top" alt="${pet.petname}">
+            <div class="card-body">
+                <h5 class="card-title">${pet.petname}</h5>
+                <p class="card-text">Dono: ${pet.owner}</p>
+                <p class="card-text">Espécie: ${pet.specie}</p>
+                <p class="card-text">Nascimento: ${dateinPTBR(pet.birthdate)}</p>
+                <p class="card-text">Idade: ${pet.age}</p>
+            </div>
+        </div>
+        `;
+    showContent.innerHTML = showContent;
+    console.log(showContent);
+    });
 }
 console.log(ListOfPet);
