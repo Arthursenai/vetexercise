@@ -1,7 +1,7 @@
 class Pet{
-    constructor(owner, name, specie, photo, birthdate){
+    constructor(owner, petname, specie, photo, birthdate){
         this.owner = owner;
-        this.name = name;
+        this.petname = petname;
         this.specie = specie;
         this.photo = photo;
         this.birthdate = birthdate;
@@ -33,12 +33,10 @@ function registerPet(){
     let petname = document.getElementById("pet").value;
     let specie = document.getElementById("specie").value;
     let photo = document.getElementById("photo").value;
-    let birthdate = document.getElementById("birthdate").value;
+    let birthdate = document.getElementById("birth").value;
 
-    let user = new User(name, email, birthdate, address, phone, cpf);
-    allUsers.add(user);
+    let pet = new Pet(owner, petname, specie, photo, birthdate);
+    ListOfPet.add(pet);
 }
 const ListOfPet = new PetsList();
-const pet1 = new Pet("Miguel", "Toby", "Dog", "assets/img/dog1.jpg", "2015-03-25");
-ListOfPet.addPet(pet1);
 console.log(ListOfPet);
