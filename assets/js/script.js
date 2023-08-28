@@ -16,7 +16,7 @@ class Pet{
         if (month < 0 || (month === 0 && today.getDate() < birthdate.getDate())) {
             age--;
         }
-        return `${age}ano e ${month} meses`;
+        return `${age} anos e ${month} meses`;
         
     }
 }
@@ -24,11 +24,11 @@ class PetsList{
     constructor(){
         this.pets = [];
     }
-    addPet(pet, photo){
+    addPet(pet){
         if(isAnyInputEmpty()){
             sendErrorMsg("Preencha todos os campos!", "error");
-        }else if (!isUrl(photo)) {
-            envieMsg("URL da imagem inválida!", "error");
+        }else if (!isUrl(pet.photo)) {
+            sendErrorMsg("URL da imagem inválida!", "error");
         }else{
             this.pets.push(pet);
             clearFields();
@@ -91,6 +91,11 @@ function clearFields(){
     document.getElementById("birth").value = "";
 }
 function showPet(){
+    if(ListOfPet.pets.length == 0){
+        sendErrorMsg("Nenhum pet cadastrado!", "error");
+    }else{
+        document.getElementById("container2").classList.remove("hidden");
+        document.getElementById("container").classList.add("hidden");
     let showContent = document.getElementById("pets-content");
     let show = "";
     ListOfPet.pets.forEach(pet => {
@@ -109,5 +114,6 @@ function showPet(){
     showContent.innerHTML = show;
     console.log(showContent);
     });
+}
 }
 console.log(ListOfPet);
