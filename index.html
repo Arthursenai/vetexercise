@@ -10,42 +10,45 @@
 <body>
     <header>
         <h1>Clínica Veterinária</h1>
-        <ul>
-            <li><a href="index.html">Cadastro</a></li>
-            <li><button id="show" onclick="showPet()">Exibição</button></li>
-        </ul>
+        <div id="ul">
+            <button class="show" onclick="indexReturn()">Cadastro</button>
+            <button class="show" onclick="showPet()">Exibição</button>
+        </div>
+
     </header>
-    <div id="container">
-    <h1>Clinica Veterinária</h1>
+    <div id="container-main">
+        <div id="container">  
+    <h2>Cadastro de Pets</h2>
     <label for="owner">
-        <span>Tutor:</span>
+        Tutor:
+    </label>
         <input type="text" name="owner" id="owner">
-    </label>
     <label for="pet">
-        <span>Nome do Pet:</span>
+        Nome do Pet:
+    </label>
         <input type="text" name="pet" id="pet">
-    </label>
     <label for="specie">
-        <span>Espécie:</span>
+        Espécie:
+    </label>
         <input type="text" name="specie" id="specie">
-    </label>
     <label for="photo">
-        <span>Foto:</span>
+        Foto:
+    </label>
         <input type="text" name="photo" id="photo">
-    </label>
     <label for="birth">
-        <span>Data de Nascimento:</span>
-        <input type="date" name="birth" id="birth">
+        Data de Nascimento:
     </label>
+        <input type="date" name="birth" id="birth">
     <p id="errorMsg"></p>
-    <button onclick="regiserPet()">Cadastrar</button>
+    <button id="submit" onclick="regiserPet()">Cadastrar</button>
+    </div>
 </div>
 <div id="container2" class="hidden">
-    <h1>Exibição</h1>
-<div id="pets-content">d</div>
+    <h1 id="h1">🐱 Lista de pacientes 🐶</h1>
+<div id="pets-content"></div>
 </div>
-<!-- <footer>
+<footer>
     <p>2023 Clinica Veterinária. Todos os direitos reservados </p>
-</footer> -->
+</footer>
 </body>
 </html>

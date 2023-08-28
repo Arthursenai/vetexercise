@@ -31,7 +31,7 @@ class PetsList{
             sendErrorMsg("URL da imagem inválida!", "error");
         }else{
             this.pets.push(pet);
-            clearFields();
+            // clearFields();
             sendErrorMsg("Pet cadastrado com sucesso!", "success");
         }
     }
@@ -94,13 +94,14 @@ function showPet(){
     if(ListOfPet.pets.length == 0){
         sendErrorMsg("Nenhum pet cadastrado!", "error");
     }else{
+        document.getElementById("container-main").classList.add("hidden");
         document.getElementById("container2").classList.remove("hidden");
-        document.getElementById("container").classList.add("hidden");
     let showContent = document.getElementById("pets-content");
     let show = "";
     ListOfPet.pets.forEach(pet => {
         show += `
-        <div class="card" style="width: 18rem;">
+        <div class="carddisplay">
+        <div class="card">
             <img src="${pet.photo}" class="card-img-top" alt="${pet.petname}">
             <div class="card-body">
                 <h5 class="card-title">${pet.petname}</h5>
@@ -110,10 +111,16 @@ function showPet(){
                 <p class="card-text">Idade: ${pet.age}</p>
             </div>
         </div>
+    </div>
         `;
     showContent.innerHTML = show;
     console.log(showContent);
     });
+
 }
+}
+function indexReturn(){
+    document.getElementById("container-main").classList.remove("hidden");
+    document.getElementById("container2").classList.add("hidden");
 }
 console.log(ListOfPet);
