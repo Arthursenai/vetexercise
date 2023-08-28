@@ -68,7 +68,15 @@ label{
     border-radius: 10px;
     margin-bottom: 3px;
 }
-
+#card-button{
+    background-color: #099309;
+    border: none;
+    padding: 10px;
+    color: #fff;
+    margin-top: 0.2rem;
+    border-radius: 10px;
+    margin-bottom: 3px;
+}
 footer{
     background-color: #099309;
     bottom: 0;

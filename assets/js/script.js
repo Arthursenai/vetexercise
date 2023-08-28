@@ -1,3 +1,4 @@
+let flag= -1
 class Pet {
     constructor(owner, petname, specie, photo, birthdate) {
         this.owner = owner;
@@ -22,7 +23,6 @@ class Pet {
     }
     getId() {
         const id = Math.floor(Math.random() * 10000);
-        console.log(id);
         return id;
     }
 }
@@ -36,19 +36,55 @@ class PetsList {
         } else if (!isUrl(pet.photo)) {
             sendErrorMsg("URL da imagem inválida!", "error");
         } else {
-            this.pets.push(pet);
-            clearFields();
-            renderPets();
+            if(flag !== -1){
+            this.pets.forEach((pet) => {
+                if(pet.id == flag){
+                    pet.owner = document.getElementById("owner").value;
+                    pet.petname = document.getElementById("pet").value;
+                    pet.specie = document.getElementById("specie").value;
+                    pet.photo = document.getElementById("photo").value;
+                    pet.birthdate = document.getElementById("birth").value;
+                    pet.age = pet.calculateAge();
+                }
+            });
+            flag = -1;
             sendErrorMsg("Pet cadastrado com sucesso!", "success");
+            showPet();
+            clearFields();
         }
+    else{
+        this.pets.push(pet);
+        sendErrorMsg("Pet cadastrado com sucesso!", "success");
+        showPet();
+        clearFields();
+        console.log(ListOfPet);
+    }}
     }
     removePet(id) {
-        this.pets = this.pets.filter((pet) => pet.id !== id);
+        this.pets = this.pets.filter(pet => pet.id !== id);
+        showPet();
     }
-    countArray(){
-        return this.pets.length;
+    editPet(id){
+        this.pets.forEach((pet) => {
+            if(pet.id == id){
+                document.getElementById("owner").value = pet.owner;
+                document.getElementById("pet").value = pet.petname;
+                document.getElementById("specie").value = pet.specie;
+                document.getElementById("photo").value = pet.photo;
+                document.getElementById("birth").value = pet.birthdate;
+            }
+        });
     }
 }
+
+document.addEventListener("keypress", function(e){
+    if(e.key == "Enter"){
+        regiserPet();
+    }
+    else{
+        return;
+    }
+})
 function sendErrorMsg(msg, type) {
     let errorMsg = document.getElementById("errorMsg");
     errorMsg.innerHTML = msg;
@@ -106,17 +142,17 @@ function clearFields() {
     document.getElementById("photo").value = "";
     document.getElementById("birth").value = "";
 }
-function showPet() {
-    if (ListOfPet.countArray() == 0) {
+function verifyArray(){
+    if(ListOfPet.pets.length == 0){
         sendErrorMsg("Nenhum pet cadastrado!", "error");
-        return;
-    } else {
+    }else{
+        sendErrorMsg("Pet cadastrado com sucesso!", "success");
         document.getElementById("container-main").classList.add("hidden");
         document.getElementById("container2").classList.remove("hidden");
     }
-} 
-function renderPets(){
-    let showContent = document.getElementById("pets-content");
+}
+function showPet() {
+        let showContent = document.getElementById("pets-content");
         let show = "";
         ListOfPet.pets.forEach(pet => {
             show += `
@@ -135,29 +171,23 @@ function renderPets(){
         </div>
     </div>
         `;
-            const petCount = ListOfPet.countArray();
-            console.log(petCount);
-            showContent.innerHTML = show;
-        });
+        console.log(showContent);
+
+    });
+    showContent.innerHTML = show;
+
 
     }
-function removeRegister(id) {
+ function removeRegister(id) {
     ListOfPet.removePet(id);
-    renderPets();
 }
 function editRegister(id) {
     indexReturn();
-    let pet = ListOfPet.pets.find(pet => pet.id == id);
-    document.getElementById("owner").value = pet.owner;
-    document.getElementById("pet").value = pet.petname;
-    document.getElementById("specie").value = pet.specie;
-    document.getElementById("photo").value = pet.photo;
-    document.getElementById("birth").value = pet.birthdate;
-    removeRegister(id);
-
+    ListOfPet.editPet(id);
+    flag = id;
+    showPet();
 }
 function indexReturn() {
     document.getElementById("container-main").classList.remove("hidden");
     document.getElementById("container2").classList.add("hidden");
 }
-console.log(ListOfPet);
