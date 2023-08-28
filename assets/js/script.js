@@ -83,8 +83,9 @@ function clearFields(){
 }
 function showPet(){
     let showContent = document.getElementById("pets-content");
+    let show = "";
     ListOfPet.pets.forEach(pet => {
-        showContent += `
+        show += `
         <div class="card" style="width: 18rem;">
             <img src="${pet.photo}" class="card-img-top" alt="${pet.petname}">
             <div class="card-body">
@@ -96,7 +97,7 @@ function showPet(){
             </div>
         </div>
         `;
-    showContent.innerHTML = showContent;
+    showContent.innerHTML = show;
     console.log(showContent);
     });
 }
