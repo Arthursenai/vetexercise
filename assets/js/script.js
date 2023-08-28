@@ -16,7 +16,7 @@ class Pet{
         if (month < 0 || (month === 0 && today.getDate() < birthdate.getDate())) {
             age--;
         }
-        return age;
+        return `${age}ano e ${month} meses`;
         
     }
 }
@@ -24,10 +24,12 @@ class PetsList{
     constructor(){
         this.pets = [];
     }
-    addPet(pet){
+    addPet(pet, photo){
         if(isAnyInputEmpty()){
             sendErrorMsg("Preencha todos os campos!", "error");
-        } else{
+        }else if (!isUrl(photo)) {
+            envieMsg("URL da imagem inválida!", "error");
+        }else{
             this.pets.push(pet);
             clearFields();
             sendErrorMsg("Pet cadastrado com sucesso!", "success");
@@ -73,6 +75,13 @@ function dateinPTBR(date) {
     let dateArray = date.split("-");
     let datePTBR = dateArray[2] + "/" + dateArray[1] + "/" + dateArray[0];
     return datePTBR;
+}
+function isUrl(url){
+    if(url.match(/\.(jpeg|jpg|gif|png)$/) != null){
+        return true;
+    }else{
+        return false;
+    }
 }
 function clearFields(){
     document.getElementById("owner").value = "";
